@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
@@ -14,14 +16,14 @@ namespace HW_modul_03_part_01
             //HomeWork s1 = new HomeWork();
             //s1.Draw(4, '*');
 
-            //HomeWork s1 = new HomeWork();
-            //Console.WriteLine(s1.Cheker(123321));
+            HomeWork s1 = new HomeWork();
+            Console.WriteLine(s1.Cheker(123321));
 
-            //int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            //int[] arr2 = { 1, 3, 6, 7, 4, 10 };
+            int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            int[] arr2 = { 1, 3, 6, 7, 4, 10 };
 
-            //int[] result = s1.Filter(arr, arr2);
-            //Console.WriteLine(string.Join(" ", result));
+            int[] result = s1.filter(arr, arr2);
+            Console.WriteLine(string.Join(" ", result));
 
             WebSite site = new WebSite();
             site.Name = "Hello1";
@@ -29,10 +31,7 @@ namespace HW_modul_03_part_01
             site.description = "Description";
             site.ip = "127.0.0.1";
 
-            //Console.WriteLine($"Name: {site.Name}");
-            //Console.WriteLine($"URL: {site.Url}");
-            //Console.WriteLine($"Description: {site.description}");
-            //Console.WriteLine($"IP: {site.ip}");
+            site.print();
 
             Journal journal = new Journal();
             journal.name = "Name";
@@ -41,11 +40,7 @@ namespace HW_modul_03_part_01
             journal.established = 1978;
             journal.number = "+12598723";
 
-            //Console.WriteLine($"Name: {journal.name}");
-            //Console.WriteLine($"Description: {journal.description}");
-            //Console.WriteLine($"email: {journal.email}");
-            //Console.WriteLine($"established: {journal.established}");
-            //Console.WriteLine($"number: {journal.number}");
+            journal.print();
 
             Shop shop = new Shop();
             shop.name = "Shop";
@@ -54,11 +49,8 @@ namespace HW_modul_03_part_01
             shop.email = "email@email";
             shop.address = "St. qwerty123";
 
-            //Console.WriteLine($"Name: {shop.name}");
-            //Console.WriteLine($"number: {shop.number}");
-            //Console.WriteLine($"description: {shop.description}");
-            //Console.WriteLine($"email: {shop.email}");
-            //Console.WriteLine($"address: {shop.address}");
+            shop.print();
+            
         }
 
         //Task 1
@@ -75,6 +67,7 @@ namespace HW_modul_03_part_01
                     Console.WriteLine();
                 }
             }
+
             public bool Cheker(int number)
             {
                 string str = number.ToString();
@@ -96,9 +89,33 @@ namespace HW_modul_03_part_01
                 return true;
             }
 
-            public int[] Filter(int[] original_arr, int[] param_arr)
+            public int[] filter(int[] original_arr, int[] for_filter)
             {
-                return original_arr.Where(x => !param_arr.Contains(x)).ToArray();
+                int[] tmp = new int[original_arr.Length];
+                int index = 0;
+
+                foreach (int i in original_arr)
+                {
+                    bool Flag = false;
+
+                    foreach (int j in for_filter)
+                    {
+                        if (i == j)
+                        {
+                            Flag = true;
+                            break;
+                        }
+                    }
+
+                    if (Flag != true)
+                    {
+                        tmp[index++] = i;
+                    }
+                }
+
+                int[] result = new int[index];
+                Array.Copy(tmp, result, index);
+                return result;
             }
         }
 
@@ -109,6 +126,14 @@ namespace HW_modul_03_part_01
             public string description { get; set; }
             public string ip { get; set; }
 
+            public void print()
+            {
+                Console.WriteLine($"Name: {Name}");
+                Console.WriteLine($"URL: {Url}");
+                Console.WriteLine($"Description: {description}");
+                Console.WriteLine($"IP: {ip} \n");
+            }
+
         }
 
         class Journal
@@ -118,6 +143,15 @@ namespace HW_modul_03_part_01
             public string description { get; set; }
             public string number { get; set; }
             public string email {get; set; }
+
+            public void print()
+            {
+                Console.WriteLine($"Name: {name}");
+                Console.WriteLine($"Description: {description}");
+                Console.WriteLine($"email: {email}");
+                Console.WriteLine($"established: {established}");
+                Console.WriteLine($"number: {number}\n");
+            }
         }
 
         class Shop
@@ -127,6 +161,15 @@ namespace HW_modul_03_part_01
             public string description { get; set; }
             public string number { get; set; }
             public string email { get; set; }
+
+            public void print()
+            {
+                Console.WriteLine($"Name: {name}");
+                Console.WriteLine($"number: {number}");
+                Console.WriteLine($"description: {description}");
+                Console.WriteLine($"email: {email}");
+                Console.WriteLine($"address: {address}\n");
+            }
         }
 
 
