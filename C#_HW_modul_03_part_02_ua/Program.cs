@@ -6,30 +6,48 @@
 
         static void Main(string[] args)
         {
-            int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 21     };
-            SortNumbers sn1;
-            sn1 = EvenNumbers;
-            int[] evenNumbers = sn1(arr);
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Console.WriteLine("Even: " + string.Join(", ", evenNumbers));
+            //int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 21     };
+            //SortNumbers sn1;
+            //sn1 = EvenNumbers;
+            //int[] evenNumbers = sn1(arr);
 
-            SortNumbers sn2;
-            sn2 = OddNumbers;
-            int[] oddNumbers = sn2(arr);
+            //Console.WriteLine("Even: " + string.Join(", ", evenNumbers));
 
-            Console.WriteLine("Odd: " + string.Join(", ", oddNumbers));
+            //SortNumbers sn2;
+            //sn2 = OddNumbers;
+            //int[] oddNumbers = sn2(arr);
 
-            SortNumbers sn3;
-            sn3 = PrimeNumbers;
-            int[] prime = sn3(arr);
+            //Console.WriteLine("Odd: " + string.Join(", ", oddNumbers));
 
-            Console.WriteLine("Prime: " + string.Join(", ", prime));
+            //SortNumbers sn3;
+            //sn3 = PrimeNumbers;
+            //int[] prime = sn3(arr);
 
-            SortNumbers sn4;
-            sn4 = FibonacciNumbers;
-            int[] fibonacci = sn4(arr);
+            //Console.WriteLine("Prime: " + string.Join(", ", prime));
 
-            Console.WriteLine("Fibonacci: " + string.Join(", ", fibonacci));
+            //SortNumbers sn4;
+            //sn4 = FibonacciNumbers;
+            //int[] fibonacci = sn4(arr);
+
+            //Console.WriteLine("Fibonacci: " + string.Join(", ", fibonacci));
+
+            DateTime dateTime = DateTime.Now;
+            Action<string> printTime = message => Console.WriteLine(message);
+            printTime($"Time is: {dateTime:HH:mm:ss}");
+
+            Action<string> printDate = message => Console.WriteLine(message);
+            printDate($"Date is: {dateTime:yyyy:MM:d}");
+
+            Action<string> printDayOfWeek = message => Console.WriteLine(message);
+            printDayOfWeek($"Day of the week is: {dateTime:dddd}");
+
+            Func<double, double, double> triangle = (baseT, height) => baseT * 0.5 * height;
+            Console.WriteLine($"Triangle with base = 5sm and height = 4sm = {triangle(5, 4)}");
+
+            Func<double, double, double> rectangle = (width, height) => width * height;
+            Console.WriteLine($"Rectangle with width 5sm and height 10sm = {rectangle(5, 10)}");
         }
 
         public static int[] EvenNumbers(int[] arr) 
